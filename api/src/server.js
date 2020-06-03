@@ -1,33 +1,22 @@
 const express = require('express');
 const cors = require("cors");
-const path = require("path");
+
+const path = require("path"); // BORRAR
 
 const app = express();
 
 global.__basedir = __dirname;
 
-var whitelist = [
-    'http://localhost:4200',
-    'https://pidy-app.herokuapp.com'
-]
-
 var corsOptions = {
-    origin: function (origin, callback) {
-        if (whitelist.indexOf(origin) !== -1) {
-            callback(null, true)
-        } else {
-            callback(new Error('Not allowed by CORS'))
-        }
-    }
-}
+    // origin: "http://localhost:4200"
+    origin: "https://pidy-app.herokuapp.com"
+};
 
 app.use(cors(corsOptions));
 
 app.use(express.json());
 
-app.use(express.urlencoded({
-    extended: true
-}));
+app.use(express.urlencoded({ extended: true }));
 
 console.log('__dirname', __dirname);
 console.log('__basedir', __basedir);
