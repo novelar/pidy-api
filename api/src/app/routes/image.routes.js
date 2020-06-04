@@ -1,6 +1,5 @@
-const controller = require("../controllers/upload.controller");
-const uploadImage = require("../middleware/uploadImage");
-const resizeImage = require("../middleware/resizeImage");
+const upload = require("../middleware/upload");
+
 const {
   authJwt
 } = require("../middleware");
@@ -16,13 +15,11 @@ let routes = (app) => {
   });
 
   app.post(
-    "/api/images/upload",
-    [
-      // authJwt.verifyToken,
-      uploadImage.single("file"),
-      resizeImage,
-    ],
-    controller.uploadFiles
+    "/multiple-upload",
+    // authJwt.verifyToken,
+    upload.uploadImages,
+    upload.resizeImages,
+    upload.getResult
   );
 };
 

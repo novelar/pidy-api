@@ -1,7 +1,6 @@
 const express = require('express');
 const cors = require("cors");
-
-const path = require("path"); // BORRAR
+const path = require("path");
 
 const app = express();
 
@@ -18,16 +17,6 @@ app.use(express.json());
 
 app.use(express.urlencoded({ extended: true }));
 
-console.log('__dirname', __dirname);
-console.log('__basedir', __basedir);
-
-// const distDir = __dirname + "/../client/dist/";
-// const distDir = path.join(__dirname, '../../client/dist/');
-// console.log('dist', distDir);
-// app.use(express.static(distDir));
-
-// app.use(express.static('./dist/'));
-
 const db = require("./app/models");
 const Role = db.role;
 
@@ -39,12 +28,7 @@ db.sequelize.sync();
 //     initial();
 // });
 
-// app.get('/', (req, res) =>
-//     res.sendFile('index.html', {root: 'dist/'}),
-// );
-
 app.get('/', (req, res) => {
-    console.log('image', path.join(`${__dirname}/app/views/index.html`));
     return res.sendFile(path.join(`${__dirname}/app/views/index.html`));
 });
 
