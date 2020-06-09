@@ -1,21 +1,24 @@
 const express = require('express');
 const cors = require("cors");
 const path = require("path");
+var fs = require('fs');
 
 const app = express();
 
 global.__basedir = __dirname;
 
 var corsOptions = {
-    origin: "http://localhost:4200"
-    // origin: "https://pidy-app.herokuapp.com"
+    // origin: "http://localhost:4200"
+    origin: "https://pidy-app.herokuapp.com"
 };
 
 app.use(cors(corsOptions));
 
 app.use(express.json());
 
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({
+    extended: true
+}));
 
 const db = require("./app/models");
 const Role = db.role;
@@ -27,6 +30,14 @@ db.sequelize.sync();
 //     console.log("Drop and re-sync db.");
 //     initial();
 // });
+
+const dir = './resources/uploads';
+
+if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, {
+        recursive: true
+    })
+}
 
 app.get('/', (req, res) => {
     return res.sendFile(path.join(`${__dirname}/app/views/index.html`));

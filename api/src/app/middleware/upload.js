@@ -49,16 +49,16 @@ const resizeImages = async (req, res, next) => {
                 const newFilename = `pidy-${filename}-${Date.now()}.jpeg`;
 
                 await sharp(file.buffer)
-                    .resize(50, 50)
+                    .resize(150)
                     .toFormat("jpeg")
-                    .jpeg({ quality: 90 })
-                    .toFile(__basedir + `/resources/static/assets/uploads/${newFilename}`);
+                    .jpeg({ quality: 75 })
+                    .toFile(__basedir + `/resources/uploads/${newFilename}`);
 
                 await Image.create({
                     type: file.mimetype,
                     name: file.originalname,
                     data: fs.readFileSync(
-                        __basedir + `/resources/static/assets/uploads/${newFilename}`
+                        __basedir + `/resources/uploads/${newFilename}`
                     )
                 });
 
