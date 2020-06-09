@@ -1,5 +1,5 @@
 const db = require("../models");
-const Categoria = db.categoria;
+const Category = db.category;
 
 const Op = db.Sequelize.Op;
 
@@ -12,13 +12,13 @@ exports.create = (req, res) => {
     return;
   }
 
-  const categoria = {
+  const category = {
     title: req.body.title,
     description: req.body.description,
     status: req.body.status ? req.body.status : false
   };
 
-  Categoria.create(categoria)
+  Category.create(category)
     .then(data => {
       res.send(data);
     })
@@ -34,7 +34,7 @@ exports.findAll = (req, res) => {
   const title = req.query.title;
   var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
 
-  Categoria.findAll({ where: condition })
+  Category.findAll({ where: condition })
     .then(data => {
       res.send(data);
     })
@@ -49,7 +49,7 @@ exports.findAll = (req, res) => {
 exports.findOne = (req, res) => {
   const id = req.params.id;
 
-  Categoria.findByPk(id)
+  Category.findByPk(id)
     .then(data => {
       res.send(data);
     })
@@ -63,7 +63,7 @@ exports.findOne = (req, res) => {
 exports.update = (req, res) => {
   const id = req.params.id;
 
-  Categoria.update(req.body, {
+  Category.update(req.body, {
     where: { id: id }
   })
     .then(num => {
@@ -87,7 +87,7 @@ exports.update = (req, res) => {
 exports.delete = (req, res) => {
   const id = req.params.id;
 
-  Categoria.destroy({
+  Category.destroy({
     where: { id: id }
   })
     .then(result => {
@@ -109,7 +109,7 @@ exports.delete = (req, res) => {
 };
 
 exports.deleteAll = (req, res) => {
-  Categoria.destroy({
+  Category.destroy({
     where: {},
     truncate: false
   })
@@ -125,7 +125,7 @@ exports.deleteAll = (req, res) => {
 };
 
 exports.findAllActives = (req, res) => {
-  Categoria.findAll({ where: { status: true } })
+  Category.findAll({ where: { status: true } })
     .then(data => {
       res.send(data);
     })

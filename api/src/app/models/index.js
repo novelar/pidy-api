@@ -20,19 +20,37 @@ db.sequelize = sequelize;
 
 db.user = require("./user.model.js")(sequelize, Sequelize);
 db.role = require("./role.model.js")(sequelize, Sequelize);
-db.categoria = require("./categoria.model.js")(sequelize, Sequelize);
-db.images = require("./image.model.js")(sequelize, Sequelize);
+db.category = require("./category.model.js")(sequelize, Sequelize);
+db.image = require("./image.model.js")(sequelize, Sequelize);
+db.product = require("./product.model.js")(sequelize, Sequelize);
+db.order = require("./order.model.js")(sequelize, Sequelize);
+db.orderDetail = require("./orderDetail.model.js")(sequelize, Sequelize);
 
 db.role.belongsToMany(db.user, {
   through: "user_roles",
   foreignKey: "roleId",
   otherKey: "userId"
 });
+
 db.user.belongsToMany(db.role, {
   through: "user_roles",
   foreignKey: "userId",
   otherKey: "roleId"
 });
+
+db.product.belongsTo(db.category);
+
+db.product.belongsTo(db.image);
+
+db.order.belongsToMany(db.orderDetail, {
+  through: "order_orderDetails",
+  foreignKey: "orderId",
+  otherKey: "orderDetailId"
+});
+
+db.orderDetail.belongsTo(db.product);
+
+db.category.belongsTo(db.user);
 
 db.ROLES = ["user", "admin", "moderator"];
 

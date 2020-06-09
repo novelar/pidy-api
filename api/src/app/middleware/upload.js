@@ -3,7 +3,7 @@ const sharp = require("sharp");
 const fs = require("fs");
 
 const db = require("../models");
-const Image = db.images;
+const Image = db.image;
 
 const multerStorage = multer.memoryStorage();
 
@@ -23,7 +23,6 @@ const upload = multer({
 const uploadFiles = upload.array("images", 10);
 
 const uploadImages = (req, res, next) => {
-    console.log('uploadImages');
     uploadFiles(req, res, err => {
         if (err instanceof multer.MulterError) {
             if (err.code === "LIMIT_UNEXPECTED_FILE") {
@@ -46,7 +45,6 @@ const resizeImages = async (req, res, next) => {
         req.body.images = [];
         await Promise.all(
             req.files.map(async file => {
-                console.log('file', file);
                 const filename = file.originalname.replace(/\..+$/, "");
                 const newFilename = `pidy-${filename}-${Date.now()}.jpeg`;
 

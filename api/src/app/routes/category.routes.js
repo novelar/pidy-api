@@ -1,4 +1,4 @@
-const categories = require("../controllers/categoria.controller.js");
+const categories = require("../controllers/category.controller.js");
 
 module.exports = (app) => {
 

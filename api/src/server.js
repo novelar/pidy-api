@@ -7,8 +7,8 @@ const app = express();
 global.__basedir = __dirname;
 
 var corsOptions = {
-    // origin: "http://localhost:4200"
-    origin: "https://pidy-app.herokuapp.com"
+    origin: "http://localhost:4200"
+    // origin: "https://pidy-app.herokuapp.com"
 };
 
 app.use(cors(corsOptions));
@@ -35,7 +35,7 @@ app.get('/', (req, res) => {
 require('./app/routes/auth.routes')(app);
 require('./app/routes/user.routes')(app);
 require('./app/routes/image.routes')(app);
-require("./app/routes/categoria.routes")(app);
+require("./app/routes/category.routes")(app);
 
 const PORT = process.env.PORT || 3000;
 
