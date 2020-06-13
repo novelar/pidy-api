@@ -3,7 +3,34 @@ const cors = require("cors");
 const path = require("path");
 var fs = require('fs');
 
+const jwt = require("express-jwt");
+const jwksRsa = require("jwks-rsa");
+
 const app = express();
+
+const authConfig = {
+    domain: "dev-dwzwn7fv.us.auth0.com",
+    audience: "pidy-api"
+};
+
+const checkJwt = jwt({
+    secret: jwksRsa.expressJwtSecret({
+        cache: true,
+        rateLimit: true,
+        jwksRequestsPerMinute: 5,
+        jwksUri: `https://${authConfig.domain}/.well-known/jwks.json`
+    }),
+
+    audience: authConfig.audience,
+    issuer: `https://${authConfig.domain}/`,
+    algorithm: ["RS256"]
+});
+
+app.get("/api/external", checkJwt, (req, res) => {
+    res.send({
+        msg: "Your Access Token was successfully validated!"
+    });
+});
 
 global.__basedir = __dirname;
 
