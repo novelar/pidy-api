@@ -1,2 +1,0 @@
-# pidy-api
-Pidy API
