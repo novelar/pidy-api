@@ -1,19 +1,14 @@
 module.exports = {
-  "username": "root",
-  "password": "password",
-  "database": "pidydb",
-  "host": "127.0.0.1",
+  // Ver si se pueden sacar las repetidas
+  "username": process.env.DB_USER,
+  "password": process.env.DB_PASSWORD,
+  "database": process.env.DB_SCHEMA,
+  "host": process.env.DB_HOST,
 
-  // HOST: "localhost",
   HOST: process.env.DB_HOST,
   USER: process.env.DB_USER,
   PASSWORD: process.env.DB_PASSWORD,
   DB: process.env.DB_SCHEMA,
-
-  // HOST: "us-cdbr-east-05.cleardb.net",
-  // USER: "bd3a38e803965f",
-  // PASSWORD: "f75a4449",
-  // DB: "heroku_9a0d66fe25d1e10",
 
   dialect: "mysql",
   pool: {
