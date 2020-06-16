@@ -15,7 +15,7 @@ module.exports = {
         name: 'Otros',
         position: 2,
         status: true,
-        userId: 1,
+        storesInfoId: 1,
         createdAt: new Date(),
         updatedAt: new Date()
       }
