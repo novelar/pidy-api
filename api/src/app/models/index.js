@@ -29,14 +29,12 @@ db.product.belongsTo(db.category);
 
 db.product.belongsTo(db.image);
 
-db.order.belongsToMany(db.orderDetail, {
-  through: "order_orderDetails",
-  foreignKey: "orderId",
-  otherKey: "orderDetailId"
-});
+db.order.hasMany(db.orderDetail);
 
 db.orderDetail.belongsTo(db.product);
 
 db.category.belongsTo(db.storeInfo);
+
+db.storeInfo.hasMany(db.order);
 
 module.exports = db;

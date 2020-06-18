@@ -11,8 +11,14 @@ module.exports = (sequelize, Sequelize) => {
         billingAdress: {
             type: Sequelize.STRING
         },
+        delivery: {
+            type: Sequelize.BOOLEAN
+        },
         totalAmount: {
             type: Sequelize.DECIMAL(8, 2)
+        },
+        billable: {
+            type: Sequelize.BOOLEAN
         }
     });
 

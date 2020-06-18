@@ -16,7 +16,7 @@ module.exports = (sequelize, Sequelize) => {
         description: {
             type: Sequelize.STRING
         },
-        whatsappNumber: {
+        phoneNumber: {
             type: Sequelize.STRING
         },
         address: {
